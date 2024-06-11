@@ -22,3 +22,6 @@ npm run dev
 
 Fourth, access the application
 in your desired browser visit "localhost:3000"
+```bash
+localhost:3000
+```
