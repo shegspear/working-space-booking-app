@@ -195,7 +195,7 @@ export default function Home() {
                     {hours > 3 && (<p>Great you got a 10% discount</p>)}
                   </div>
 
-                  <button onClick={save}>
+                  <button onClick={save} className='border-2 p-2 rounded-lg'>
                     Save
                   </button>
                 </div>
@@ -229,7 +229,7 @@ export default function Home() {
                 {hours > 3 && (<p>Great you got a 10% discount</p>)}
               </div>
 
-              <button onClick={save}>
+              <button onClick={save} className='border-2 p-2 rounded-lg'>
                 Save
               </button>
             </div>
