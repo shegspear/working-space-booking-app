@@ -17,6 +17,8 @@ export default function Home() {
 
   const [cost, setCost] = useState<number>(0);
 
+  const [bookings, setBookings] = useState<any>([]);
+
   const cal = (e:any) => {
     e.preventDefault();
     setHours(e.target.value);
@@ -37,8 +39,11 @@ export default function Home() {
 
   const save = () => {
     if(slots > 0) {
-      let arr:any = localStorage.getItem('bookings') || [];
-
+      let arr:any = [];
+      // if (typeof window !== "undefined") {
+      //   arr = localStorage.getItem('bookings') || [];
+      // }
+     
       let data = {
         tier: `Booked tier ${tier}.`,
         hour: `Booked session ${hours} hours.`,
@@ -46,8 +51,10 @@ export default function Home() {
       };
   
       arr.push(data);
+
+      setBookings(arr);
   
-      localStorage.setItem('bookings', JSON.stringify(arr));
+      // localStorage.setItem('bookings', JSON.stringify(arr));
   
       toast.success("Great your slot has been booked")
   
