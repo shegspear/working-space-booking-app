@@ -63,6 +63,7 @@ export default function Home() {
 
   useEffect(() => {
     let arr:any = localStorage.getItem('bookings') || [];
+    arr = JSON.parse(arr)
     console.log(arr)
     setSlots(15 - arr.length);
   }, [])
