@@ -176,12 +176,12 @@ export default function Home() {
               ) 
               : slotType === 2 ? (
                 <div
-                className='w-9/12 flex lg:flex-row flex-col items-center justify-between'
+                className='w-9/12'
                >
                 <p
                   className='text-medium mb-10'
                 >
-                  Save your slot.
+                  Save your slot we charge of $25 per hour.
                 </p>
 
                 <div>
@@ -207,14 +207,14 @@ export default function Home() {
       }
 
       {
-        tier !== '' && (
+        (tier !== '' && slotType === 1) && (
           <div
             className='w-10/12'
           >
             <p
               className='text-medium mb-10'
             >
-              Save your slot.
+              Save your slot, we charge ${tier === 'basic' ? 10 : tier === 'premium' ? 15 : tier === 'executive' ? 20 : 0} per hour.
             </p>
 
             <div>
