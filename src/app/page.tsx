@@ -65,7 +65,9 @@ export default function Home() {
     let arr:any = localStorage.getItem('bookings') || [];
     arr = JSON.parse(arr)
     console.log(arr)
-    setSlots(15 - arr.length);
+    if(arr.length > 0) {
+      setSlots(15 - arr.length);
+    }
   }, [])
 
   return (
