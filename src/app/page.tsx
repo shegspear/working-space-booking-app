@@ -61,14 +61,14 @@ export default function Home() {
     }
   }
 
-  useEffect(() => {
-    let arr:any = localStorage.getItem('bookings') || [];
-    arr = JSON.parse(arr)
-    console.log(arr)
-    if(arr.length > 0) {
-      setSlots(15 - arr.length);
-    }
-  }, [])
+  // useEffect(() => {
+  //   let arr:any = localStorage.getItem('bookings') || [];
+  //   // arr = JSON.parse(arr)
+  //   console.log(arr)
+  //   if(arr.length > 0) {
+  //     setSlots(15 - arr.length);
+  //   }
+  // }, [])
 
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
