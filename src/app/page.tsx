@@ -1,6 +1,8 @@
 "use client"
 
 import {useState, useEffect} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const [slots, setSlots] = useState<number>(15);
@@ -34,28 +36,40 @@ export default function Home() {
   }
 
   const save = () => {
-    let arr:any = localStorage.getItem('bookings') || [];
+    if(slots > 0) {
+      let arr:any = localStorage.getItem('bookings') || [];
 
-    let data = {
-      tier: `Booked tier ${tier}.`,
-      hour: `Booked session ${hours} hours.`,
-      cost: `Total cost ${cost} USD`
-    };
-
-    arr.push(data);
-
-    localStorage.setItem('bookings', JSON.stringify(arr));
-
-    setSlots( slots - 1)
+      let data = {
+        tier: `Booked tier ${tier}.`,
+        hour: `Booked session ${hours} hours.`,
+        cost: `Total cost ${cost} USD`
+      };
+  
+      arr.push(data);
+  
+      localStorage.setItem('bookings', JSON.stringify(arr));
+  
+      toast.success("Great your slot has been booked")
+  
+      setSlots( slots - 1)
+      setSlotType(0)
+      setTeir('')
+      setHours(0)
+      setCost(0)
+    } else {
+      toast.success("Sorry no slots available, check later.")
+    }
   }
 
   useEffect(() => {
     let arr:any = localStorage.getItem('bookings') || [];
+    console.log(arr)
     setSlots(15 - arr.length);
   }, [])
 
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
+      <ToastContainer />
       <h1
         className='text-center text-white font-bold text-2xl mb-10'
       >
@@ -171,7 +185,7 @@ export default function Home() {
                     {hours > 3 && (<p>Great you got a 10% discount</p>)}
                   </div>
 
-                  <button>
+                  <button onClick={save}>
                     Save
                   </button>
                 </div>
@@ -205,7 +219,7 @@ export default function Home() {
                 {hours > 3 && (<p>Great you got a 10% discount</p>)}
               </div>
 
-              <button>
+              <button onClick={save}>
                 Save
               </button>
             </div>
