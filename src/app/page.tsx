@@ -19,6 +19,8 @@ export default function Home() {
 
   const [bookings, setBookings] = useState<any>([]);
 
+  const [dashboard, setDashboard] = useState<string>('home')
+
   const cal = (e:any) => {
     e.preventDefault();
     setHours(e.target.value);
@@ -39,7 +41,7 @@ export default function Home() {
 
   const save = () => {
     if(slots > 0) {
-      let arr:any = [];
+      let arr:any = bookings;
       // if (typeof window !== "undefined") {
       //   arr = localStorage.getItem('bookings') || [];
       // }
@@ -80,13 +82,38 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center p-10">
       <ToastContainer />
+      <div
+        className='w-full mb-20 flex justify-center items-center'
+      >
+        <div 
+          className='w-2/12 flex flex-row justify-between items-center'
+        >
+          <p
+            onClick={() => setDashboard('home')}
+            className={`border-2 ${dashboard === 'home' ? 'text-black bg-white' : ' text-white bg-transparent'} rounded-lg p-2 cursor-pointer`}
+          >
+            Home
+          </p>
+
+          <p
+            onClick={() => setDashboard('revenue')}
+            className={`border-2 ${dashboard === 'revenue' ? 'text-black bg-white' : ' text-white bg-transparent'} rounded-lg p-2 cursor-pointer`}
+          >
+            Revenue
+          </p>
+        </div>
+      </div>
+
       <h1
         className='text-center text-white font-bold text-2xl mb-10'
       >
         Welcome To Book A Work space, we have {slots} slots available
       </h1>
 
-      <div
+      {
+        dashboard === 'home' ? (
+          <>
+                <div
         className='w-10/12 mb-10'
       >
 
@@ -112,7 +139,7 @@ export default function Home() {
 
           <div
             className={`border-2 ${slotType === 2 ? 'border-green-300' : ''} rounded-lg p-4 cursor-pointer`}
-            onClick={() => setSlotType(2)}
+            onClick={() => {setSlotType(2); setTeir('team');}}
           >
             <p
               className='text-medium'
@@ -237,6 +264,44 @@ export default function Home() {
         )
       }
 
+          </>
+        ) : (
+          <div className='w-8/12'>
+            <div>
+              <p className='mb-4 text-semibold text-xl'>
+                Generated revenue
+              </p>
+
+              {
+                bookings.length > 0 ? (
+                  <div className='w-full'>
+                    {
+                      bookings.map((cur:any, idx:number) => (
+                        <div
+                          key={idx}
+                          className='w-full flex flex-row justify-between items-center mb-4' 
+                        >
+                          <p>
+                            {cur.tier}
+                          </p>
+
+                          <p>
+                            {cur.hour}
+                          </p>
+
+                          <p>
+                            {cur.cost}
+                          </p>
+                        </div>
+                      ))
+                    }
+                  </div>
+                ) : null
+              }
+            </div>  
+          </div>
+        )
+      }
     </main>
   );
 }
